@@ -1,7 +1,7 @@
-import IconRating from "../assets/rating.png";
-import IconRatingHalf from "../assets/rating-half.png";
-import ImgTemp from "../assets/temp-1.jpeg";
-import Button from "../assets/play-button.png";
+import IconRating from "../../../../assets/rating.png";
+import IconRatingHalf from "../../../../assets/rating-half.png";
+import ImgTemp from "../../../../assets/temp-1.jpeg";
+import Button from "../../../../assets/play-button.png";
 const Banner = () => {
   return (
     <div className="w-full h-[600px] bg-banner bg-center bg-no-repeat bg-cover relative">

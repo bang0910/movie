@@ -1,30 +1,30 @@
 import PropType from "prop-types";
-import ListMovie from "./ListMovie";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const Header = ({ onSearch }) => {
   const [textSearch, setTextSearch] = useState([]);
   return (
     <div className="p-4 bg-black flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <h1 className="text-[30px] uppercase font-bold text-red-700 ">
-          <a href={<ListMovie />}>movie</a>
+          <Link to={"/home"}>movie</Link>
         </h1>
       </div>
       <div className="flex items-center text-white space-x-8">
         <h2>
-          <a className=" hover:text-red-500" href="#">
+          <Link className=" hover:text-red-500" to="#">
             Home
-          </a>
+          </Link>
         </h2>
         <h2>
-          <a className=" hover:text-red-500" href="#">
+          <Link className=" hover:text-red-500" to="#">
             About
-          </a>
+          </Link>
         </h2>
         <h2>
-          <a className=" hover:text-red-500" href="#">
+          <Link className=" hover:text-red-500" to="#">
             Contact
-          </a>
+          </Link>
         </h2>
       </div>
       <div className="flex items-center space-x-4">
@@ -44,11 +44,11 @@ const Header = ({ onSearch }) => {
       </div>
       <div className="flex justify-start item-center space-x-1">
         <button className="text-[15px] text-white hover:text-teal-400 hover:scale-105">
-          <a href="#">Đăng nhập</a>
+          <Link to={"/login"}>Đăng nhập</Link>
         </button>
         <h3 className="text-[20px] text-white">/</h3>
         <button className="text-[15px] text-white hover:text-teal-400 hover:scale-105">
-          <a href="#">Đăng kí</a>
+          <Link to={"/register"}>Đăng kí</Link>
         </button>
       </div>
     </div>
