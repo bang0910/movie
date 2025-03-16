@@ -7,23 +7,23 @@ const Header = ({ onSearch }) => {
     <div className="p-4 bg-black flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <h1 className="text-[30px] uppercase font-bold text-red-700 ">
-          <Link to={"/home"}>movie</Link>
+          <Link to={"/"}>MovieZone</Link>
         </h1>
       </div>
-      <div className="flex items-center text-white space-x-8">
+      <div className="flex text-xl items-center text-white space-x-8">
         <h2>
-          <Link className=" hover:text-red-500" to="#">
+          <Link className=" hover:text-red-500" to="/">
             Home
           </Link>
         </h2>
         <h2>
-          <Link className=" hover:text-red-500" to="#">
-            About
+          <Link className=" hover:text-red-500" to={"/"}>
+            Phim Hot
           </Link>
         </h2>
         <h2>
-          <Link className=" hover:text-red-500" to="#">
-            Contact
+          <Link className=" hover:text-red-500" to={"/"}>
+            Phim Nổi Bật
           </Link>
         </h2>
       </div>

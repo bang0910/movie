@@ -1,7 +1,7 @@
-import Banner from "../../shared/site/components/Layout/Banner";
-import Header from "../../shared/site/components/Layout/Header";
-import ListMovie from "../../shared/site/components/Layout/ListMovie";
-import Search from "../../shared/site/components/Layout/Search";
+import Banner from "../../shared/components/Layout/Banner";
+import Header from "../../shared/components/Layout/Header";
+import ListMovie from "../../shared/components/Layout/ListMovie";
+import Search from "../../shared/components/Layout/Search";
 import { useState, useEffect } from "react";
 import { MovieProvider } from "../../context/MovieProvider";
 

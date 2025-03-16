@@ -1,86 +1,117 @@
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Background from "../../shared/site/components/Layout/Background";
 
 const Register = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  const handleRegister = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, email, password });
-    alert("Đăng ký thành công!");
+    if (form.password !== form.confirmPassword) {
+      alert("Mật khẩu không khớp!");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const exists = users.find((u) => u.email === form.email);
+    if (exists) {
+      alert("Email đã tồn tại!");
+      return;
+    }
+
+    users.push({
+      fullName: form.fullName,
+      email: form.email,
+      password: form.password,
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Đăng ký thành công! Bạn có thể đăng nhập.");
+    navigate("/login");
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen">
-      <Background />
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
-          Đăng Ký
+    <div className="bg-gradient-to-br from-pink-600 via-purple-700 to-indigo-800 min-h-screen flex items-center justify-center">
+      <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-8 max-w-md w-full text-white">
+        <h2 className="text-3xl font-bold text-center mb-6">
+          🎉 Tạo Tài Khoản
         </h2>
-
-        <form onSubmit={handleRegister}>
-          {/* Họ và Tên */}
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-medium mb-2">
-              Họ và Tên
-            </label>
+        <p className="text-center mb-6 text-sm text-gray-200">
+          Gia nhập MovieZone và khám phá thế giới điện ảnh!
+        </p>
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          <div>
+            <label className="block mb-1 text-sm">Họ và tên</label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Nhập họ và tên ..."
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="fullName"
+              value={form.fullName}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-pink-300"
+              placeholder="Nguyễn Văn A"
               required
             />
           </div>
-
-          {/* Email */}
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-medium mb-2">
-              Email
-            </label>
+          <div>
+            <label className="block mb-1 text-sm">Email</label>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Nhập email ..."
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-pink-300"
+              placeholder="you@example.com"
               required
             />
           </div>
-
-          {/* Mật khẩu */}
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-medium mb-2">
-              Mật Khẩu
-            </label>
+          <div>
+            <label className="block mb-1 text-sm">Mật khẩu</label>
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Nhập mật khẩu ..."
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-pink-300"
+              placeholder="••••••••"
               required
             />
           </div>
-
-          {/* Nút Đăng Ký */}
+          <div>
+            <label className="block mb-1 text-sm">Xác nhận mật khẩu</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-pink-300"
+              placeholder="••••••••"
+              required
+            />
+          </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300"
+            className="w-full bg-gradient-to-r from-pink-400 via-yellow-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 text-white font-bold py-2 rounded-xl transition duration-300 shadow-lg hover:shadow-2xl"
           >
-            Đăng Ký
+            🚀 Đăng Ký Ngay
           </button>
         </form>
-
-        {/* Đã có tài khoản? */}
-        <p className="text-sm text-gray-500 text-center mt-4">
+        <p className="mt-6 text-sm text-center text-gray-200">
           Đã có tài khoản?{" "}
-          <a href="/login" className="text-blue-500 hover:underline">
-            Đăng nhập ngay
-          </a>
+          <Link
+            to={"/login"}
+            className="text-yellow-300 underline hover:text-yellow-400"
+          >
+            Đăng nhập
+          </Link>
         </p>
       </div>
     </div>
